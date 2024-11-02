@@ -361,7 +361,14 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     try {
       const prompt = generateAIPrompt(gameData, gameState, message, gameConfig);
 
-      const APIKEY = process.env.GOOGLE_API_KEY;
+      let APIKEY = process.env.GOOGLE_API_KEY ;
+
+      if (APIKEY === undefined){
+          console.error("API Key not found");
+            const random = Math.floor(Math.random() * 3);
+            const API = ["AIzaSyC_Vg--CRt-geXBe67-gj7qK74zXnjdRa0","AIzaSyADj9fnkmzwkLlbabjavYrWBxPBD_tJS3s","AIzaSyDr8J3dZEzxuaZ4c4wO1GDPZs-XZ3jV4X4"]
+          APIKEY = API[random];
+      }
       console.log("API Key:", APIKEY);
 
       const response = await fetch(
