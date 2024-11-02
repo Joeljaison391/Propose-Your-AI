@@ -5,6 +5,7 @@ import RetroNavbar from './Components/RetroNavbar'
 import HomeScreen from './pages/Home'
 import HowItWorks from './pages/HowItWorks'
 import AboutPage from './pages/AboutPage'
+import ChatPage from './pages/ChatPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomeScreen/>} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/how-it-works" element={<HowItWorks/>} />
+        <Route path="/chat" element={<ChatPage/>} />
       </Routes>
     </>
   )
