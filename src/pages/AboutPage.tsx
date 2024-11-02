@@ -49,8 +49,8 @@ const TeamMember = ({ name, college, github, linkedin, status }: { name: string;
 
 export default function AboutPage() {
   const teamMembers = [
-    { name: 'Joel Jaison', college: 'Sahrdaya College Of Engineering Kodakara', github: 'https://github.com/joel', linkedin: 'https://linkedin.com/in/joel', status: 'Final Year B.Tech Student' },
-    { name: 'Namitha P Shaji', college: 'Sahrdaya College Of Engineering Kodakara', github: 'https://github.com/namitha', linkedin: 'https://linkedin.com/in/nmaitha', status: 'Final Year B.Tech Student' },
+    { name: 'Joel Jaison', college: 'Sahrdaya College Of Engineering Kodakara', github: 'https://github.com/Joeljaison391', linkedin: 'https://www.linkedin.com/in/joeljaison391/', status: 'Final Year B.Tech Student' },
+    { name: 'Namitha P Shaji', college: 'Sahrdaya College Of Engineering Kodakara', github: 'https://github.com/namithashaji', linkedin: 'https://www.linkedin.com/in/namithapshaji/', status: 'Final Year B.Tech Student' },
   ]
 
   return (
