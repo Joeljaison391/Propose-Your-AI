@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
-import { Monitor, Zap, MessageSquare, BarChart2, Info } from 'lucide-react'
+import { Monitor, Zap, MessageSquare, BarChart2, Info, Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 export default function RetroNavbar() {
-  const [activeLink, setActiveLink] = useState('home')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
 
   const links = [
@@ -14,6 +13,10 @@ export default function RetroNavbar() {
     { name: 'Compatibility Score', path: '/score', icon: BarChart2 },
     { name: 'About', path: '/about', icon: Info },
   ]
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
     <nav className="bg-gray-900 text-neon-green p-4 font-mono">
@@ -26,7 +29,18 @@ export default function RetroNavbar() {
           </svg>
           <span className="text-2xl font-bold tracking-wider animate-pulse">AI Matchmaker</span>
         </div>
-        <ul className="flex space-x-6">
+        
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden text-neon-green hover:text-neon-pink focus:outline-none focus:text-neon-pink"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+
+        {/* Desktop menu */}
+        <ul className="hidden md:flex space-x-6">
           {links.map((link) => (
             <li key={link.name}>
               <Link
@@ -36,7 +50,6 @@ export default function RetroNavbar() {
                     ? 'bg-neon-green text-gray-900 animate-pulse-slow'
                     : 'hover:bg-neon-green hover:text-gray-900 hover:animate-glow'
                 }`}
-                onClick={() => setActiveLink(link.name.toLowerCase())}
               >
                 <link.icon className="w-5 h-5" />
                 <span>{link.name}</span>
@@ -45,6 +58,30 @@ export default function RetroNavbar() {
           ))}
         </ul>
       </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden mt-4">
+          <ul className="flex flex-col space-y-2">
+            {links.map((link) => (
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded transition-colors duration-300 ${
+                    location.pathname === link.path
+                      ? 'bg-neon-green text-gray-900 animate-pulse-slow'
+                      : 'hover:bg-neon-green hover:text-gray-900 hover:animate-glow'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <link.icon className="w-5 h-5" />
+                  <span>{link.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </nav>
   )
 }
