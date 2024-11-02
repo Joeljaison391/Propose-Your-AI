@@ -361,7 +361,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     try {
       const prompt = generateAIPrompt(gameData, gameState, message, gameConfig);
 
-      const APIKEY = process.env.REACT_APP_GOOGLE_API_KEY;
+      const APIKEY = process.env.GOOGLE_API_KEY;
       console.log("API Key:", APIKEY);
 
       const response = await fetch(
