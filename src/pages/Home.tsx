@@ -1,66 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Slider } from "@/Components/ui/slider"
 import { Button } from "@/Components/ui/button"
 import { Input } from "@/Components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/Components/ui/tooltip"
 import { AlertCircle, Zap, MessageSquare, Smile, Bot, AlertTriangle } from 'lucide-react'
+import { useGameContext } from '@/context/GameContext' 
+import { useNavigate } from 'react-router-dom'
 
 export default function HomeScreen() {
-  const [userPersonality, setUserPersonality] = useState(50)
-  const [aiBehavior, setAiBehavior] = useState(50)
-  const [showProposeButton, setShowProposeButton] = useState(false)
-  const [gameData, setGameData] = useState({
-    userGender: '',
-    userName: '',
-    aiName: '',
-    aiModel: '',
-  })
+    const navigate = useNavigate()
+  const { gameData, updateGameData, isConfigurationComplete } = useGameContext()
 
   const handlePersonalityChange = (value: number[]) => {
-    setUserPersonality(value[0])
-    checkConfigurationComplete()
+    updateGameData('userPersonality', value[0])
   }
 
   const handleBehaviorChange = (value: number[]) => {
-    setAiBehavior(value[0])
-    checkConfigurationComplete()
+    updateGameData('aiBehavior', value[0])
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGameData({ ...gameData, [e.target.name]: e.target.value })
-    checkConfigurationComplete()
+    const { name, value } = e.target
+    updateGameData(name as keyof typeof gameData, value)
   }
 
   const handleSelectChange = (value: string, name: string) => {
-    setGameData({ ...gameData, [name]: value })
-    checkConfigurationComplete()
-  }
-
-  const checkConfigurationComplete = () => {
-    if (
-      userPersonality > 0 &&
-      aiBehavior > 0 &&
-      gameData.userGender &&
-      gameData.userName &&
-      gameData.aiName &&
-      gameData.aiModel
-    ) {
-      setShowProposeButton(true)
-    } else {
-      setShowProposeButton(false)
-    }
+    updateGameData(name as keyof typeof gameData, value)
   }
 
   const handleSubmit = () => {
-    const fullGameData = {
-      ...gameData,
-      userPersonality,
-      aiBehavior,
+    if (isConfigurationComplete()) {
+      console.log('Game data submitted:', gameData)
+      navigate('/chat')
     }
-    console.log('Game data submitted:', fullGameData)
-    // Here you would typically pass this data to another function or API
-    // For example: startGame(fullGameData);
   }
 
   return (
@@ -140,7 +113,7 @@ export default function HomeScreen() {
         <div className="mb-6">
           <label className="block mb-2">User Personality</label>
           <Slider
-            defaultValue={[50]}
+            defaultValue={[gameData.userPersonality]}
             max={100}
             step={1}
             onValueChange={handlePersonalityChange}
@@ -155,7 +128,7 @@ export default function HomeScreen() {
         <div className="mb-6">
           <label className="block mb-2">AI Behavior</label>
           <Slider
-            defaultValue={[50]}
+            defaultValue={[gameData.aiBehavior]}
             max={100}
             step={1}
             onValueChange={handleBehaviorChange}
@@ -196,18 +169,18 @@ export default function HomeScreen() {
             <TooltipTrigger asChild>
               <Button
                 className={`text-xl py-3 px-6 rounded-full ${
-                  showProposeButton
+                  isConfigurationComplete()
                     ? 'bg-neon-purple text-gray-900 animate-pulse hover:animate-none hover:bg-neon-pink'
                     : 'bg-gray-700 text-gray-500 cursor-not-allowed'
                 }`}
-                disabled={!showProposeButton}
+                disabled={!isConfigurationComplete()}
                 onClick={handleSubmit}
               >
                 Propose Me!
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom">
-              <p>{showProposeButton ? "Let's start the game!" : "Complete all fields to start!"}</p>
+              <p>{isConfigurationComplete() ? "Let's start the game!" : "Complete all fields to start!"}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
