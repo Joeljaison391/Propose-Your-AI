@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {  Send, Zap,  Star } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Send, Zap, Star } from 'lucide-react';
+import { useGameContext } from '@/context/GameContext';
 
 const Message = ({ text, isAI, reaction }: { text: string; isAI: boolean; reaction?: string }) => (
   <motion.div
@@ -18,7 +19,7 @@ const Message = ({ text, isAI, reaction }: { text: string; isAI: boolean; reacti
       )}
     </div>
   </motion.div>
-)
+);
 
 const MetricBar = ({ label, value }: { label: string; value: number }) => (
   <div className="mb-2">
@@ -35,51 +36,48 @@ const MetricBar = ({ label, value }: { label: string; value: number }) => (
       />
     </div>
   </div>
-)
+);
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Array<{ text: string; isAI: boolean; reaction?: string }>>([])
-  const [inputText, setInputText] = useState('')
-  const [metrics, setMetrics] = useState({
-    romanceScore: 0,
-    humorLevel: 0,
-    creativityQuotient: 0,
-    mysteryFactor: 0,
-  })
-  const [tokenLimit, setTokenLimit] = useState(20)
-  const [showSummary, setShowSummary] = useState(false)
-  const chatEndRef = useRef<HTMLDivElement>(null)
+  const {
+    gameState,
+    initiateChat,
+    submitMessage,
+    canSubmitMessage,
+    getRemainingMessages,
+  } = useGameContext();
+
+  const [inputText, setInputText] = useState('');
+  const [isInitialized, setIsInitialized] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [gameState.messages]);
 
-  const handleSendMessage = () => {
-    if (inputText.trim() && tokenLimit > 0) {
-      setMessages([...messages, { text: inputText, isAI: false }])
-      setInputText('')
-      setTokenLimit(tokenLimit - 1)
-
-      // Simulate AI response
-      setTimeout(() => {
-        const aiResponse = "That's an interesting approach! Tell me more."
-        const reaction = Math.random() > 0.5 ? '😊' : '❤️'
-        setMessages(prev => [...prev, { text: aiResponse, isAI: true, reaction }])
-
-        // Update metrics
-        setMetrics(prev => ({
-          romanceScore: Math.min(100, prev.romanceScore + Math.floor(Math.random() * 10)),
-          humorLevel: Math.min(100, prev.humorLevel + Math.floor(Math.random() * 10)),
-          creativityQuotient: Math.min(100, prev.creativityQuotient + Math.floor(Math.random() * 10)),
-          mysteryFactor: Math.min(100, prev.mysteryFactor + Math.floor(Math.random() * 10)),
-        }))
-
-        if (tokenLimit === 1) {
-          setShowSummary(true)
-        }
-      }, 1000)
+  useEffect(() => {
+    if (!isInitialized) {
+      initiateChat({
+        userName: 'User',
+        aiName: 'AI',
+        aiBehavior: 50,
+        userGender: 'male',
+      });
+      setIsInitialized(true);
     }
-  }
+  }, [initiateChat, isInitialized]);
+
+  const handleSendMessage = async () => {
+    if (inputText.trim() && canSubmitMessage()) {
+      try {
+        await submitMessage(inputText);
+        setInputText('');
+      } catch (error) {
+        console.error('Error submitting message:', error);
+        // Handle the error (e.g., show an error message to the user)
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-neon-green font-mono p-4 relative overflow-hidden">
@@ -93,14 +91,14 @@ export default function ChatPage() {
         <motion.div
           className="absolute top-10 left-10 text-4xl"
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
         >
           ❤️
         </motion.div>
         <motion.div
           className="absolute bottom-10 right-10 text-4xl"
           animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
         >
           💖
         </motion.div>
@@ -109,8 +107,8 @@ export default function ChatPage() {
       <div className="max-w-4xl mx-auto grid grid-cols-[1fr_250px] gap-4 relative z-10">
         <div className="bg-gray-800 rounded-lg p-4 border-2 border-neon-purple">
           <div className="h-[calc(100vh-200px)] overflow-y-auto mb-4">
-            {messages.map((message, index) => (
-              <Message key={index} {...message} />
+            {gameState.messages.map((message, index) => (
+              <Message key={index} text={message.content} isAI={message.sender === 'ai'} reaction={message.reaction || ''} />
             ))}
             <div ref={chatEndRef} />
           </div>
@@ -136,21 +134,21 @@ export default function ChatPage() {
             <Zap className="mr-2 text-neon-purple" />
             Metrics
           </h2>
-          <MetricBar label="Romance Score" value={metrics.romanceScore} />
-          <MetricBar label="Humor Level" value={metrics.humorLevel} />
-          <MetricBar label="Creativity Quotient" value={metrics.creativityQuotient} />
-          <MetricBar label="Mystery Factor" value={metrics.mysteryFactor} />
+          <MetricBar label="Romance Score" value={gameState.currentScores.romance} />
+          <MetricBar label="Humor Level" value={gameState.currentScores.humor} />
+          <MetricBar label="Mystery Level" value={gameState.currentScores.mystery} />
+          {/* <MetricBar label="Creativity Quotient" value={gameState.currentScores.creativity || 0} /> */}
           <div className="mt-4">
-            <p className="text-sm mb-2">Token Limit:</p>
+            <p className="text-sm mb-2">Remaining Messages:</p>
             <div className="text-2xl font-bold text-neon-pink animate-pulse">
-              {tokenLimit}
+              {getRemainingMessages()}
             </div>
           </div>
         </div>
       </div>
 
       <AnimatePresence>
-        {showSummary && (
+        {gameState.finalReport && (
           <motion.div
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
@@ -165,24 +163,24 @@ export default function ChatPage() {
             >
               <h2 className="text-2xl mb-4 text-center text-neon-pink">Compatibility Report</h2>
               <p className="text-lg mb-4 text-center">
-                {metrics.romanceScore > 70 ? "You're almost soulmate material!" : "Friend-zone level achieved."}
+                {gameState.currentScores.romance > 70 ? "You're almost soulmate material!" : "Friend-zone level achieved."}
               </p>
               <div className="flex justify-center items-center mb-4">
                 <Star className="text-neon-green mr-2" />
                 <span className="text-3xl font-bold text-neon-green">
-                  {Math.floor((metrics.romanceScore + metrics.humorLevel + metrics.creativityQuotient + metrics.mysteryFactor) / 4)}%
+                  {Math.floor((gameState.currentScores.romance + gameState.currentScores.humor + gameState.currentScores.mystery) / 3)}%
                 </span>
               </div>
               <button
-                onClick={() => setShowSummary(false)}
+                onClick={() => window.location.reload()}
                 className="w-full bg-neon-purple text-gray-900 p-2 rounded-lg hover:bg-neon-pink transition-colors duration-300"
               >
-                Close
+                Start Over
               </button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
