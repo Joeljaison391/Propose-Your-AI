@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# AI Matchmaker: Propose Your AI 💖
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive, retro-inspired chat game where users try to “woo” an AI with creativity, humor, and charm! This project is built for the Useless Hackathon hosted by ThinkerHub (Nov 2-3), combining humor with retro visuals for a lighthearted, engaging experience.
 
-Currently, two official plugins are available:
+## 🕹️ Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In **AI Matchmaker: Propose Your AI**, users chat with an AI to earn a "Compatibility Score" based on conversation dynamics. From romantic gestures to playful jokes, the AI evaluates the user’s responses in real-time, creating an unpredictable, entertaining experience.
 
-## Expanding the ESLint configuration
+## 🎨 Retro Theme
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This project is styled with a nostalgic, retro computer aesthetic, reminiscent of early chat applications:
 
-- Configure the top-level `parserOptions` property like this:
+- **Pixelated fonts** and **neon colors** (green, purple, and pink) on a dark background.
+- **Classic animations** such as blinking cursors, glowing buttons, and vintage icons.
+- **Playful feedback** from the AI, complete with retro-styled reactions.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ⚙️ How It Works
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Configure** your chat style and AI mood.
+2. **Chat with the AI** by using the “Propose Me” button.
+3. Try to impress the AI with clever lines, jokes, and creativity while respecting the chat’s guidelines.
+4. **Win Conditions**: Keep your scores high on metrics like *Romance*, *Humor*, and *Mystery* while staying within token limits.
+5. Receive a **Compatibility Report** based on your final score!
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 📄 Game Rules
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Avoid offensive language** to keep it fun and friendly.
+- **Be creative**—original jokes and unique responses score higher.
+- **Maintain mystery**—oversharing might lower your Mystery Factor.
+
+## 💻 Technology Stack
+
+- **Frontend**: React with a retro-themed design and animations.
+- **AI**: Built with conversational agents, real-time scoring, and personality configurations.
+
+## 👥 Meet the Team
+
+- **Joel  Jaison**
+- **Namitha P Shaji**
