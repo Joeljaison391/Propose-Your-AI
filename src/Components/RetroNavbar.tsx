@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Monitor, Zap, MessageSquare, BarChart2, Info, Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import Logo from '@/assets/Logo.png'
 
 export default function RetroNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,7 +28,7 @@ export default function RetroNavbar() {
             <circle cx="12" cy="12" r="6" className="fill-neon-pink" />
             <path d="M8 8L16 16M16 8L8 16" className="stroke-neon-blue stroke-2" />
           </svg>
-          <span className="text-2xl font-bold tracking-wider animate-pulse">AI Matchmaker</span>
+          <img className='h-16 w-26 px-2' src={Logo} alt="" />
         </div>
         
         {/* Mobile menu button */}
