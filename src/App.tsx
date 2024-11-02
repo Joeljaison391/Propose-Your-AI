@@ -4,6 +4,7 @@ import {Routes , Route} from 'react-router-dom'
 import RetroNavbar from './Components/RetroNavbar'
 import HomeScreen from './pages/Home'
 import HowItWorks from './pages/HowItWorks'
+import AboutPage from './pages/AboutPage'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
     <RetroNavbar/>
       <Routes>
         <Route path="/" element={<HomeScreen/>} />
-        <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/about" element={<AboutPage/>} />
         <Route path="/how-it-works" element={<HowItWorks/>} />
       </Routes>
     </>
