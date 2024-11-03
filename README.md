@@ -1,5 +1,7 @@
 # AI Matchmaker: Propose Your AI 💖
 
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584945/kehfkav7y3eyrfs0wizb.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584945/kehfkav7y3eyrfs0wizb.png)
+
 An interactive, retro-inspired chat game where users try to “woo” an AI with creativity, humor, and charm! This project is built for the Useless Hackathon hosted by ThinkerHub (Nov 2-3), combining humor with retro visuals for a lighthearted, engaging experience.
 
 ## 🕹️ Project Overview
@@ -37,3 +39,29 @@ This project is styled with a nostalgic, retro computer aesthetic, reminiscent o
 
 - **Joel  Jaison**
 - **Namitha P Shaji**
+
+# Screen-Shots
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/omfx1pzwgjtccumxezzu.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/omfx1pzwgjtccumxezzu.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/fr92cbisejdtzi3tmduq.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/fr92cbisejdtzi3tmduq.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/purjjgkegyx66acvguco.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/purjjgkegyx66acvguco.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/fx3p0alrn7bvtn4bmtyk.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/fx3p0alrn7bvtn4bmtyk.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/gai6fnakc6wnih8maejf.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/gai6fnakc6wnih8maejf.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/czxl0woodlb97lwznj6x.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584432/czxl0woodlb97lwznj6x.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/snbz3begfeffbvzsbj9q.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/snbz3begfeffbvzsbj9q.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/mw68v6calhlcebs6gx1x.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/mw68v6calhlcebs6gx1x.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/yui34meph5zjpotubuhe.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/yui34meph5zjpotubuhe.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/jykszumqq2oqvbjn43xi.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/jykszumqq2oqvbjn43xi.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/e2nrhesoxtudwyeqal1w.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584431/e2nrhesoxtudwyeqal1w.png)
+
+![https://res.cloudinary.com/dxraggwp4/image/upload/v1730584433/ccqjef6mbu8xhyboapzi.png](https://res.cloudinary.com/dxraggwp4/image/upload/v1730584433/ccqjef6mbu8xhyboapzi.png)
